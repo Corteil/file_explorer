@@ -70,7 +70,7 @@ class FileExplorer(app.App):
         self._tdlg = None
         self._tdlg_done = None
         self._load(None)
-        self.note("Right: item menu, Left: folder menu")
+        self.note("Menus: RIGHT, LEFT")
 
     # --- small services ---
 
@@ -521,7 +521,7 @@ class FileExplorer(app.App):
         ui.text(ctx, count, 0, 88, ui.WARN if self.clipboard else ui.MUTED, ui.tiny_font_size)
 
     def _panel(self, ctx):
-        ctx.rgba(0, 0, 0, 0.93).rectangle(-82, -68, 164, 138).fill()
+        ctx.rgba(0, 0, 0, 0.93).rectangle(-82, -68, 164, 158).fill()
 
     def _draw_menu(self, ctx):
         self._panel(ctx)
@@ -540,7 +540,8 @@ class FileExplorer(app.App):
     def _draw_job(self, ctx):
         frac = self.job_done / self.job_total
         ui.ring(ctx, frac, ui.ACCENT)
-        ui.text(ctx, self.job_label, 0, -34, ui.TEXT, ui.tiny_font_size, tail=8)
+        ctx.font_size = ui.tiny_font_size   # keep inside the progress ring
+        ui.text(ctx, ui.fit(ctx, self.job_label, 170, 8), 0, -34, ui.TEXT, ui.tiny_font_size)
         ui.text(ctx, "%d%%" % int(frac * 100), 0, 0, ui.ACCENT, ui.label_font_size)
         ui.bar(ctx, -70, 20, 140, 8, frac, ui.ACCENT)
         ui.text(ctx, "Cancel to stop", 0, 46, ui.MUTED, ui.tiny_font_size)
