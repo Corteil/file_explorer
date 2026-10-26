@@ -1,0 +1,13 @@
+[app]
+name = "File Explorer"
+category = "Apps"
+
+[entry]
+class = "FileExplorer"
+
+[metadata]
+author = "Corteil"
+license = "MIT"
+url = "https://github.com/Corteil/file_explorer"
+description = "Browse the badge's flash and SD card: view files, copy, move, rename, delete and make folders."
+version = "1"
