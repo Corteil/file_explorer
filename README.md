@@ -1,7 +1,7 @@
 # File Explorer
 
 A file manager for the EMF Tildagon badge. Browse the badge's flash and any SD card, view
-files, and copy, move, rename and delete them, or make new folders.
+files, and copy, move, rename and delete them, or make new folders and empty files.
 
 ## Controls
 
@@ -17,7 +17,7 @@ next name starting with it).
 
 - **Item menu (RIGHT):** Open, Copy, Cut, Rename, Delete (asks first), Info.
 - **Folder menu (LEFT):** Paste here / Move here (when something is copied or cut), New folder,
-  Refresh, Storage info.
+  New file (empty), Refresh, Storage info.
 - **Copy and move** show a progress ring and can be stopped with CANCEL (a stopped copy leaves
   the part already written). Moving inside one storage is an instant rename; between flash and
   SD it copies and then deletes. Pasting a name that already exists makes `name (2).ext`.

@@ -177,6 +177,17 @@ def mkdir(path):
         raise FSError("Could not create folder")
 
 
+def mkfile(path):
+    """Create a new, empty file."""
+    if exists(path):
+        raise FSError("Name already exists")
+    try:
+        with open(path, "wb"):
+            pass
+    except OSError:
+        raise FSError("Could not create file")
+
+
 def rename(path, new_name):
     new_name = check_name(new_name)
     dst = join(parent(path), new_name)

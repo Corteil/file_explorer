@@ -1,12 +1,12 @@
 """File Explorer for the Tildagon badge: browse the badge's flash and any SD card, view
-files, and copy, move, rename, delete and create folders.
+files, and copy, move, rename, delete and create folders and files.
 
 Keys (the six edge buttons, or a USB keyboard's arrows, Enter and Escape):
   UP / DOWN     move through the list (hold to repeat); a typed letter jumps to a name
   OK            open a folder, or view a file
   CANCEL        up one folder; on the storage list, leave the app
   RIGHT         menu for the highlighted item (Open, Copy, Cut, Rename, Delete, Info)
-  LEFT          menu for this folder (Paste here, New folder, Refresh, Storage info)
+  LEFT          menu for this folder (Paste here, New folder, New file, Refresh, Storage info)
 
 License: MIT
 """
@@ -224,6 +224,7 @@ class FileExplorer(app.App):
             verb = "Paste" if self.clipboard[1] == "copy" else "Move"
             items.append((verb + " here", lambda: self._after(self._paste)))
         items += [("New folder", lambda: self._after(self._new_folder)),
+                  ("New file", lambda: self._after(self._new_file)),
                   ("Refresh", lambda: self._after(lambda: self._reload())),
                   ("Storage info", self._storage_info)]
         self._open_menu(fs.basename(self.path), items)
@@ -257,6 +258,17 @@ class FileExplorer(app.App):
             except fs.FSError as err:
                 self._fail(err)
         self.ask_text("New folder", "", done)
+
+    def _new_file(self):
+        def done(text):
+            try:
+                name = fs.check_name(text)
+                fs.mkfile(fs.join(self.path, name))
+                self._reload(select=name)
+                self.note("Created " + name)
+            except fs.FSError as err:
+                self._fail(err)
+        self.ask_text("New file", "", done)
 
     def _confirm_delete(self, e):
         self._open_menu("Delete %s?" % e[0], [("No", self._close_menu),

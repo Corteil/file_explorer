@@ -2,6 +2,6 @@
     "name": "File Explorer",
     "category": "Apps",
     "author": "Corteil",
-    "description": "Browse the badge's flash and SD card: view files, copy, move, rename, delete and make folders.",
-    "version": "1"
+    "description": "Browse the badge's flash and SD card: view files, copy, move, rename, delete and make folders and files.",
+    "version": "2"
 }
